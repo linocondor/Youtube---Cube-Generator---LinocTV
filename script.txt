@@ -1,0 +1,68 @@
+import bpy 
+import random
+
+#numbers boolean to generate cubes 2 = blank and 1 = black
+numbers = [1,2,2,2]
+
+#number of cubes per grid
+num_of_cubes = 10  #increase this with precaution
+
+#size of the cube
+size_of_cube = 10
+
+#position
+x = size_of_cube/2
+y = size_of_cube/2
+z = size_of_cube/2
+
+#materials
+materials_list = ['Material.001'] #transparent material
+
+materials_list_2 = ['Material.003']  #color materials
+
+#materials_list_2 = ['Material.002','Material.003','Material.004','Material.005','Material.006','Material.007']  #color 
+
+#This loop is for X, Y and Z axis generation cubes
+
+for m in range(0,num_of_cubes):  #z axis
+    #reset position x and y
+    x = size_of_cube/2
+    y = size_of_cube/2
+    
+    for n in range(0,num_of_cubes):  #y axis
+            
+        #reset position z     
+        x = size_of_cube/2
+        
+        for i in range(0,num_of_cubes):  #x axis
+            
+            #insert cube
+            bpy.ops.mesh.primitive_cube_add(size=size_of_cube , enter_editmode=False, align='WORLD',          location=(x,y,z), scale=(1, 1, 1))
+
+            #Materials random
+            
+            if random.choice(numbers) == 1:
+                item = bpy.context.object
+                item.data.materials.append(bpy.data.materials[random.choice(materials_list_2)])
+            
+            else:
+                item = bpy.context.object
+                item.data.materials.append(bpy.data.materials["Material.001"])
+            
+                     
+                
+            x += size_of_cube
+                
+                
+        y += size_of_cube
+        
+    z += size_of_cube
+    
+    
+    
+
+
+
+
+
+
